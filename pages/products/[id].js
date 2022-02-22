@@ -4,8 +4,6 @@ import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import CartStore from '../../store/cart-store/cart-store';
 import { getProductById, getProducts } from '../../utils/help-api';
-import db from '../../utils/db';
-import Product from '../../models/productModel';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -237,13 +235,11 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  db.connect();
-  const products = await Product.find({});
+  const products = await getProducts();
   const paths = products.map((product) => ({
     params: { id: product._id.toString() },
   }));
 
-  db.disconnect();
   return {
     paths,
     fallback: 'blocking',
