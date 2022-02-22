@@ -3,7 +3,7 @@ import axios from 'axios';
 export const server =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://nextjs-movies-info.vercel.app';
+    : 'hicm-tailwindshop.vercel.app';
 
 export const getProducts = async () => {
   try {

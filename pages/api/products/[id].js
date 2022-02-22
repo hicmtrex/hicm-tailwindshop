@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
   await db.disconnect();
 
   if (product) {
-    res.status(200).send(product);
+    res.status(200).json(product);
   } else {
     res.status(404).json({ message: 'product not found' });
   }
