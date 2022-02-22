@@ -1,13 +1,12 @@
 import nc from 'next-connect';
 import Product from '../../../models/productModel';
-import db from '../../../utils/db';
+import connectDb from '../../../utils/db';
 
 const handler = nc();
 
 handler.get(async (req, res) => {
-  await db.connect();
+  await connectDb();
   const products = await Product.aggregate([{ $sample: { size: 1 } }]);
-  await db.disconnect();
 
   if (products) {
     res.status(200).json(products);

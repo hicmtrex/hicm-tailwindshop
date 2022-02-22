@@ -1,14 +1,12 @@
 import nc from 'next-connect';
 import Product from '../../../models/productModel';
-import db from '../../../utils/db';
-import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import connectDb from '../../../utils/db';
 
 const handler = nc();
 
 handler.get(async (req, res) => {
-  await db.connect();
+  await connectDb();
   const products = await Product.find({});
-  await db.disconnect();
 
   if (products) {
     res.status(200).json(products);

@@ -1,7 +1,7 @@
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import nc from 'next-connect';
 import Order from '../../../models/orderModel';
-import db from '../../../utils/db';
+import connectDb from '../../../utils/db';
 import { onError } from '../../../utils/error';
 
 const handler = nc({
@@ -9,10 +9,9 @@ const handler = nc({
 });
 
 handler.get(async (req, res) => {
-  await db.connect();
   const { user } = getSession(req, res);
+  await connectDb();
   const userOrder = await Order.find({ username: user.nickname });
-  await db.disconnect();
 
   if (userOrder) {
     res.status(201).json(userOrder);
@@ -23,7 +22,7 @@ handler.get(async (req, res) => {
 
 handler.post(async (req, res) => {
   const { cartItems, shippingAddress, totalPrice } = req.body;
-  await db.connect();
+  await connectDb();
   const { user } = getSession(req, res);
 
   const order = new Order({
