@@ -20,11 +20,11 @@ const HomePage = ({ products }) => {
 };
 
 export const getStaticProps = async () => {
-  const products = await getProducts();
+  const staticProducts = await getProducts();
 
   return {
     props: {
-      products,
+      products: staticProducts,
     },
     revalidate: 600,
   };
