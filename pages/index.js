@@ -1,8 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 import DownBanner from '../components/down-banner';
 import Footer from '../components/footer';
-import ProductCard from '../components/product/product-card';
-import Pagination from '../components/ui/pagination';
 import { getProducts } from '../utils/help-api';
 import ProductsPage from './products';
 

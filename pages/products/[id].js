@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';

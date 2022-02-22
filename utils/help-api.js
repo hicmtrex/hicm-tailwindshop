@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-export const baseUrl = 'http://localhost:3000';
+export const server =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://nextjs-movies-info.vercel.app';
 
 export const getProducts = async () => {
   try {
-    const { data } = await axios.get(`${baseUrl}/api/products`);
+    const { data } = await axios.get(`${server}/api/products`);
     return data;
   } catch (error) {
     return error;
@@ -13,9 +16,7 @@ export const getProducts = async () => {
 
 export const getRandomProduct = async () => {
   try {
-    const { data } = await axios.get(
-      'http://localhost:3000/api/products/random'
-    );
+    const { data } = await axios.get(`${server}/api/products/random`);
     return data;
   } catch (error) {
     return error;
@@ -24,7 +25,7 @@ export const getRandomProduct = async () => {
 
 export const getProductById = async (id) => {
   try {
-    const { data } = await axios.get(`${baseUrl}/api/products/${id}`);
+    const { data } = await axios.get(`${server}/api/products/${id}`);
     return data;
   } catch (error) {
     return error;
