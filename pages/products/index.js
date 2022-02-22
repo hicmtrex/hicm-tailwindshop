@@ -1,4 +1,3 @@
-import React from 'react';
 import ProductCard from '../../components/product/product-card';
 import Pagination from '../../components/ui/pagination';
 
