@@ -5,7 +5,6 @@ import Navbar from '../components/navbar';
 import CartContext from '../store/cart-store/cart-context';
 import { UserProvider } from '@auth0/nextjs-auth0';
 import '../styles/globals.css';
-import Carousel from '../components/ui/carousel';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
