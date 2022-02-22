@@ -1,34 +1,45 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = process.env.MONGO_URI;
+const connection = {};
 
-if (!MONGO_URI) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
-  );
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-const connectDb = async () => {
-  if (cached.conn) {
-    return cached.conn;
+const connect = async () => {
+  if (connection.isConnected) {
+    console.log('already connected');
+    return;
   }
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGO_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
+  if (mongoose.connections.length > 0) {
+    connection.isConnected = mongoose.connections[0].readyState;
+    if (connection.isConnected === 1) {
+      console.log('use previous connection');
+      return;
+    }
+    await mongoose.disconnect();
   }
-  cached.conn = await cached.promise;
-  return cached.conn;
+  const db = await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  console.log('new connection');
+  connection.isConnected = db.connections[0].readyState;
 };
 
-export default connectDb;
+const disconnect = async () => {
+  if (connection.isConnected) {
+    if (process.env.NODE_ENV === 'production') {
+      await mongoose.disconnect();
+      connection.isConnected = false;
+    } else {
+      console.log('not disconnected');
+    }
+  }
+};
+
+const convertDocToObj = (doc) => {
+  doc._id = doc._id.toString();
+  doc.createdAt = doc.createdAt.toString();
+  doc.updatedAt = doc.updatedAt.toString();
+  return doc;
+};
+
+const db = { connect, disconnect, convertDocToObj };
+export default db;

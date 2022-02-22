@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import CartStore from '../../store/cart-store/cart-store';
-import { getProductById, getProducts } from '../../utils/help-api';
+import { getProducts } from '../../utils/help-api';
+import axios from 'axios';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -10,10 +12,21 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = () => {
+  const router = useRouter();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('L');
   const { setOpen, addToCart } = useContext(CartStore);
+  const [product, setProduct] = useState({});
+
+  const getProductById = async (id) => {
+    const { data } = await axios.get(`/api/product/${id}`);
+    setProduct(data);
+  };
+
+  useEffect(() => {
+    getProductById(router.query.id);
+  }, []);
 
   return (
     <div className='max-w-2xl mx-auto py-3 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8'>
@@ -223,24 +236,24 @@ const ProductDetail = ({ product }) => {
   );
 };
 
-export const getStaticProps = async ({ params }) => {
-  const product = await getProductById(params.id);
-  return {
-    props: {
-      product,
-    },
-    revalidate: 180,
-  };
-};
+// export const getStaticProps = async ({ params }) => {
+//   const product = await getProductById(params.id);
+//   return {
+//     props: {
+//       product,
+//     },
+//     revalidate: 180,
+//   };
+// };
 
-export const getStaticPaths = async () => {
-  const products = await getProducts();
-  const paths = products.map((product) => ({ params: { id: product._id } }));
+// export const getStaticPaths = async () => {
+//   const products = await getProducts();
+//   const paths = products.map((product) => ({ params: { id: product._id } }));
 
-  return {
-    paths: paths,
-    fallback: 'blocking',
-  };
-};
+//   return {
+//     paths,
+//     fallback: 'blocking',
+//   };
+// };
 
 export default ProductDetail;
