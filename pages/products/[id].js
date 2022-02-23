@@ -3,7 +3,8 @@ import React, { useContext, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import CartStore from '../../store/cart-store/cart-store';
-import { getProductById, getProducts } from '../../utils/help-api';
+import { getProductById, getProducts, server } from '../../utils/help-api';
+import axios from 'axios';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -235,13 +236,17 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const products = await getProducts();
-  const paths = products.map((product) => ({
-    params: { id: product._id.toString() },
-  }));
-
   return {
-    paths,
+    paths: [
+      { params: { id: '620be3c130c734accb7af0fd' } },
+      { params: { id: '620be3c130c734accb7af106' } },
+      { params: { id: '620be3c130c734accb7af10f' } },
+      { params: { id: '620be3c130c734accb7af118' } },
+      { params: { id: '620be3c130c734accb7af121' } },
+      { params: { id: '620be3c130c734accb7af12a' } },
+      { params: { id: '620be3c130c734accb7af133' } },
+      { params: { id: '620be3c130c734accb7af13c' } },
+    ],
     fallback: 'blocking',
   };
 };
