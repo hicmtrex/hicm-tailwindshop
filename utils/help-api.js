@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const server =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
@@ -7,8 +5,8 @@ export const server =
 
 export const getProducts = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:3000/api/products`);
-    return data;
+    const res = await fetch(`${server}/api/products`);
+    return res.json();
   } catch (error) {
     return error;
   }
@@ -16,10 +14,8 @@ export const getProducts = async () => {
 
 export const getRandomProduct = async () => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:3000/api/products/random`
-    );
-    return data;
+    const res = await fetch(`${server}/api/products/random`);
+    return res.json();
   } catch (error) {
     return error;
   }
@@ -27,10 +23,8 @@ export const getRandomProduct = async () => {
 
 export const getProductById = async (id) => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:3000/api/products/${id}`
-    );
-    return data;
+    const res = await fetch(`${server}/api/products/${id}`);
+    return res.json();
   } catch (error) {
     return error;
   }
