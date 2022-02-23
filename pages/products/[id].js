@@ -6,6 +6,7 @@ import { getProductById, getProducts } from '../../utils/help-api';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import useSWR from 'swr';
+import Loader from '../../components/ui/loader';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -27,9 +28,7 @@ const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState('L');
   const { setOpen, addToCart } = useContext(CartStore);
 
-  if (!product || error) {
-    return <p>loading...</p>;
-  }
+  if (!product || error) return <Loader />;
 
   return (
     <div className='max-w-2xl mx-auto py-3 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8'>

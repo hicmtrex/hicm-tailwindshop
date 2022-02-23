@@ -15,11 +15,8 @@ const Layout = ({ children }) => {
         {router.pathname === '/' && <Banner />}
         <main className='home__main'>{children}</main>
         <Cart />
-        <div className='cpy_ mt-auto text-center py-3 bg-gray-900 text-gray-100'>
-          <p>
-            © 2022 All Rights Reserved By{' '}
-            <a href='https://html.design/'>Jamstack</a>
-          </p>
+        <div className='py-6 mt-auto text-sm text-center bg-gray-900 text-gray-100'>
+          © 2022 Company Co. All rights reserved.
         </div>
       </UserProvider>
     </CartContext>

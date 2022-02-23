@@ -1,19 +1,23 @@
+import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import useSWR from 'swr';
 import DownBanner from '../components/down-banner';
 import Footer from '../components/footer';
+import Loader from '../components/ui/loader';
 import ProductsPage from './products';
 
 const fetcher = async (url) => {
-  const res = await fetch(url);
-  return res.json();
+  const { data } = await axios.get(url);
+  return data;
 };
 
 const HomePage = () => {
-  const url = `http://localhost:3000/api/products`;
+  const url = `/api/products`;
   const { data, error } = useSWR(url, fetcher);
 
   const staticProducts = data;
+  if (!data || error) return <Loader />;
+
   return (
     <>
       <div className='bg-white' id='products'>
