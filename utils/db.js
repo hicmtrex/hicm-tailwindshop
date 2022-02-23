@@ -15,10 +15,13 @@ const connect = async () => {
     }
     await mongoose.disconnect();
   }
-  const db = await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const db = await mongoose.connect(
+    'mongodb+srv://hicmtrex:qXxa8QGWMatd8TcE@cluster0.tmot6.mongodb.net/hicm-shop-tailwind?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
   console.log('new connection');
   connection.isConnected = db.connections[0].readyState;
 };
