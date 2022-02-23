@@ -20,27 +20,4 @@ const ProductDetail = ({ product }) => {
   );
 };
 
-// export const getStaticProps = async ({ params }) => {
-//   const product = await getProductById(params.id);
-//   if (!product) {
-//     return { notFound: true };
-//   }
-//   return {
-//     props: {
-//       product,
-//     },
-//     revalidate: 180,
-//   };
-// };
-
-// export const getStaticPaths = async () => {
-//   const products = await getProducts();
-//   const paths = products.map((product) => ({ params: { id: product._id } }));
-
-//   return {
-//     paths,
-//     fallback: 'blocking',
-//   };
-// };
-
 export default ProductDetail;
