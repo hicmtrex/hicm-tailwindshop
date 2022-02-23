@@ -1,15 +1,17 @@
+import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
 import DownBanner from '../components/down-banner';
 import Footer from '../components/footer';
 import { getProducts } from '../utils/help-api';
 import ProductsPage from './products';
 
-const HomePage = ({ products }) => {
+const HomePage = ({ staticProducts }) => {
+  const router = useRouter();
   return (
     <>
       <div className='bg-white' id='products'>
         <Toaster position='top-center' reverseOrder={false} />
-        <ProductsPage products={products} />
+        <ProductsPage staticProducts={staticProducts} />
       </div>
       <DownBanner />
       <Footer />
@@ -18,11 +20,11 @@ const HomePage = ({ products }) => {
 };
 
 export const getStaticProps = async () => {
-  const products = await getProducts();
+  const staticProducts = await getProducts();
 
   return {
     props: {
-      products,
+      staticProducts,
     },
     revalidate: 600,
   };

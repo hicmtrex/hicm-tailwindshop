@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { getProducts } from '../utils/help-api';
 
-const Banner = () => {
+const Banner = ({ staticProducts }) => {
   const [randomProduct, setRandomProduct] = useState([]);
 
   const getRandomProduct = async () => {
@@ -17,7 +18,7 @@ const Banner = () => {
   useEffect(() => {
     getRandomProduct();
   }, []);
-  console.log(randomProduct);
+  console.log(staticProducts);
   return (
     <section className=' bg-gray-800 text-gray-100 '>
       <div className='container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between'>
@@ -55,6 +56,17 @@ const Banner = () => {
       </div>
     </section>
   );
+};
+
+export const getStaticProps = async () => {
+  const staticProducts = await getProducts();
+
+  return {
+    props: {
+      staticProducts,
+    },
+    revalidate: 600,
+  };
 };
 
 export default Banner;

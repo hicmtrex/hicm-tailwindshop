@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import CartStore from '../../store/cart-store/cart-store';
 import { getProductById, getProducts } from '../../utils/help-api';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import useSWR from 'swr';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -11,19 +13,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const ProductDetail = ({ product }) => {
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  return res.json();
+};
+
+const ProductDetail = () => {
+  const router = useRouter();
+  const url = `http://localhost:3000/api/products/${router.query.id}`;
+  const { data, error } = useSWR(url, fetcher);
+  const product = data;
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('L');
   const { setOpen, addToCart } = useContext(CartStore);
-  const router = useRouter();
 
-  if (router.isFallback) return null;
+  if (!product || error) {
+    return <p>loading...</p>;
+  }
 
   return (
     <div className='max-w-2xl mx-auto py-3 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8'>
       <div className='mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8'>
         <div className=' aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block'>
-          <img
+          <Image
+            width={350}
+            height={550}
+            layout='responsive'
             src={product?.images[0]}
             alt={product?.name}
             className='w-full h-full object-center object-cover'
@@ -31,7 +46,15 @@ const ProductDetail = ({ product }) => {
         </div>
         <div className=' lg:grid lg:grid-cols-1 lg:gap-y-8'>
           <div className='aspect-w-3 aspect-h-2 rounded-lg overflow-hidden'>
-            <img
+            {/* <img
+              src={product?.images[1]}
+              alt={product?.name}
+              className='w-full h-full object-center object-cover'
+            /> */}
+            <Image
+              width={350}
+              height={550}
+              layout='responsive'
               src={product?.images[1]}
               alt={product?.name}
               className='w-full h-full object-center object-cover'
@@ -72,7 +95,9 @@ const ProductDetail = ({ product }) => {
             <form className='mt-10' onSubmit={(e) => e.preventDefault()}>
               {/* Colors */}
               <div>
-                <h3 className='text-sm text-gray-900 font-medium'>Color</h3>
+                <h3 className='text-sm text-gray-900 font-medium'>
+                  Color : {selectedColor}
+                </h3>
                 <RadioGroup
                   value={selectedColor}
                   onChange={setSelectedColor}
@@ -82,7 +107,7 @@ const ProductDetail = ({ product }) => {
                     Choose a color
                   </RadioGroup.Label>
                   <div className='flex items-center space-x-3'>
-                    {product.color.map((c) => (
+                    {product?.color.map((c) => (
                       <RadioGroup.Option
                         key={c}
                         style={{ backgroundColor: c }}
@@ -115,7 +140,9 @@ const ProductDetail = ({ product }) => {
 
               <div className='mt-10'>
                 <div className='flex items-center justify-between'>
-                  <h3 className='text-sm text-gray-900 font-medium'>Size</h3>
+                  <h3 className='text-sm text-gray-900 font-medium'>
+                    Size : <span>{selectedSize.name}</span>
+                  </h3>
                   <a className='text-sm font-medium text-indigo-600 hover:text-indigo-500'>
                     Size guide
                   </a>
@@ -227,27 +254,25 @@ const ProductDetail = ({ product }) => {
   );
 };
 
-export const getStaticProps = async ({ params }) => {
-  const product = await getProductById(params.id);
-  if (!product) {
-    return { notFound: true };
-  }
-  return {
-    props: {
-      product,
-    },
-    revalidate: 180,
-  };
-};
+// export const getStaticProps = async ({ params }) => {
+//   const product = await getProductById(params.id);
 
-export const getStaticPaths = async () => {
-  const products = await getProducts();
-  const paths = products.map((product) => ({ params: { id: product._id } }));
+//   return {
+//     props: {
+//       product,
+//     },
+//     revalidate: 180,
+//   };
+// };
 
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-};
+// export const getStaticPaths = async () => {
+//   const products = await getProducts();
+//   const paths = products.map((product) => ({ params: { id: product._id } }));
+
+//   return {
+//     paths,
+//     fallback: 'blocking',
+//   };
+// };
 
 export default ProductDetail;

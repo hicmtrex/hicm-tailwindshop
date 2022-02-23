@@ -1,7 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
-const Pagination = () => {
+const Pagination = ({ postsPerPage, totalPosts, changePage, currentPage }) => {
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className='bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6'>
       <div className='flex-1 flex justify-between sm:hidden'>
@@ -32,43 +37,39 @@ const Pagination = () => {
             aria-label='Pagination'
           >
             <a
-              href='#'
-              className='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+              onClick={() =>
+                changePage(currentPage <= 1 ? currentPage : currentPage - 1)
+              }
+              className=' cursor-pointer relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
             >
               <span className='sr-only'>Previous</span>
               <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
             </a>
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            <a
-              href='#'
-              aria-current='page'
-              className='z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium'
-            >
-              1
-            </a>
-            <a
-              href='#'
-              className='bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium'
-            >
-              2
-            </a>
-            <a
-              href='#'
-              className='bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium'
-            >
-              3
-            </a>
+
+            {pageNumbers.map((num, index) => (
+              <a
+                key={index}
+                onClick={() => changePage(num)}
+                aria-current='page'
+                className={`${
+                  num === currentPage &&
+                  'z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium'
+                }  bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer`}
+              >
+                {num}
+              </a>
+            ))}
 
             <a
-              href='#'
-              className='bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium'
-            >
-              4
-            </a>
-
-            <a
-              href='#'
-              className='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+              onClick={() =>
+                changePage(
+                  currentPage >= pageNumbers.length
+                    ? currentPage
+                    : currentPage + 1
+                )
+              }
+              className=' cursor-pointer relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
             >
               <span className='sr-only'>Next</span>
               <ChevronRightIcon className='h-5 w-5' aria-hidden='true' />

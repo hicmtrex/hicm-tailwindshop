@@ -85,7 +85,7 @@ const Cart = () => {
                                     <p className='ml-4'>${item.price}</p>
                                   </div>
                                   <p className='mt-1 text-sm text-gray-500'>
-                                    {item.color} - {item?.size.name}
+                                    {item.color} - {item?.size}
                                   </p>
                                 </div>
                                 <div className='flex-1 flex items-end justify-between text-sm'>

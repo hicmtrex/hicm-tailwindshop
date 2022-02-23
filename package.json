@@ -19,7 +19,8 @@
     "next-connect": "^0.12.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hot-toast": "^2.2.0"
+    "react-hot-toast": "^2.2.0",
+    "swr": "^1.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
