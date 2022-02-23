@@ -4,7 +4,6 @@ import useSWR from 'swr';
 import DownBanner from '../components/down-banner';
 import Footer from '../components/footer';
 import Loader from '../components/ui/loader';
-import { server } from '../utils/help-api';
 import ProductsPage from './products';
 
 const fetcher = async (url) => {
@@ -13,7 +12,7 @@ const fetcher = async (url) => {
 };
 
 const HomePage = () => {
-  const url = `${server}/api/products`;
+  const url = `/api/products`;
   const { data, error } = useSWR(url, fetcher);
 
   const staticProducts = data;

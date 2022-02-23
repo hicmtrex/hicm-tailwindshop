@@ -21,7 +21,7 @@ const fetcher = async (url) => {
 
 const ProductDetail = () => {
   const router = useRouter();
-  const url = `${server}/api/products/${router.query.id}`;
+  const url = `/api/products/${router.query.id}`;
   const { data, error } = useSWR(url, fetcher);
   const product = data;
   const [selectedColor, setSelectedColor] = useState('');
