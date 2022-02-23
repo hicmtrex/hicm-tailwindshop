@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const server =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
@@ -5,8 +7,8 @@ export const server =
 
 export const getProducts = async () => {
   try {
-    const res = await fetch(`${server}/api/products`);
-    return res.json();
+    const { data } = await axios.get(`http://localhost:3000/api/products`);
+    return data;
   } catch (error) {
     return error;
   }

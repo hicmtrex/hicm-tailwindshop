@@ -1,12 +1,19 @@
-import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
+import useSWR from 'swr';
 import DownBanner from '../components/down-banner';
 import Footer from '../components/footer';
-import { getProducts } from '../utils/help-api';
 import ProductsPage from './products';
 
-const HomePage = ({ staticProducts }) => {
-  const router = useRouter();
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  return res.json();
+};
+
+const HomePage = () => {
+  const url = `http://localhost:3000/api/products`;
+  const { data, error } = useSWR(url, fetcher);
+
+  const staticProducts = data;
   return (
     <>
       <div className='bg-white' id='products'>
@@ -19,15 +26,15 @@ const HomePage = ({ staticProducts }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const staticProducts = await getProducts();
+// export const getStaticProps = async () => {
+//   const staticProducts = await getProducts();
 
-  return {
-    props: {
-      staticProducts,
-    },
-    revalidate: 600,
-  };
-};
+//   return {
+//     props: {
+//       staticProducts,
+//     },
+//     revalidate: 600,
+//   };
+// };
 
 export default HomePage;
