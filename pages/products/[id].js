@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { StarIcon } from '@heroicons/react/solid';
 import CartStore from '../../store/cart-store/cart-store';
-import { getProductById, getProducts } from '../../utils/help-api';
+import { getProductById, getProducts, server } from '../../utils/help-api';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import useSWR from 'swr';
@@ -21,7 +21,7 @@ const fetcher = async (url) => {
 
 const ProductDetail = () => {
   const router = useRouter();
-  const url = `http://localhost:3000/api/products/${router.query.id}`;
+  const url = `${server}/api/products/${router.query.id}`;
   const { data, error } = useSWR(url, fetcher);
   const product = data;
   const [selectedColor, setSelectedColor] = useState('');
