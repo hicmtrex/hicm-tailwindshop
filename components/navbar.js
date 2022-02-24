@@ -1,11 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import {
-  MenuIcon,
-  XIcon,
-  ShoppingCartIcon,
-} from '@heroicons/react/outline';
+import { MenuIcon, XIcon, ShoppingCartIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { useUser } from '@auth0/nextjs-auth0';
 import CartStore from '../store/cart-store/cart-store';
@@ -98,14 +94,13 @@ const Navbar = () => {
                 )}
 
                 {!user ? (
-                  <Link href='/api/auth/login' passHref>
-                    <button
-                      type='button'
-                      className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
-                    >
-                      Login
-                    </button>
-                  </Link>
+                  <a
+                    href='/api/auth/login'
+                    type='button'
+                    className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
+                  >
+                    Login
+                  </a>
                 ) : (
                   <Menu as='div' className='ml-3 relative'>
                     <div>
