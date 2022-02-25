@@ -127,7 +127,10 @@ const Profile = () => {
                 <div className='grid grid-cols-2'>
                   <div className='px-4 py-2 font-semibold'>Email.</div>
                   <div className='px-4 py-2'>
-                    <a className='text-blue-800' href='mailto:jane@example.com'>
+                    <a
+                      className='text-blue-800 text-sm'
+                      href='mailto:jane@example.com'
+                    >
                       {user?.email}
                     </a>
                   </div>
