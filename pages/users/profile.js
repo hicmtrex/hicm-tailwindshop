@@ -124,11 +124,11 @@ const Profile = () => {
                   <div className='px-4 py-2 font-semibold'>Country</div>
                   <div className='px-4 py-2'>{shippingAddress?.country}</div>
                 </div>
-                <div className='grid grid-cols-2'>
+                <div className='grid md:grid-cols-2 sm:grid-cols-4 '>
                   <div className='px-4 py-2 font-semibold'>Email.</div>
                   <div className='px-4 py-2'>
                     <a
-                      className='text-blue-800 text-sm'
+                      className='text-blue-800 '
                       href='mailto:jane@example.com'
                     >
                       {user?.email}
