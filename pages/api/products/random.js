@@ -1,19 +1,17 @@
-import nc from 'next-connect';
 import Product from '../../../models/productModel';
-import db from '../../../utils/db';
+import connectDb from '../../../utils/db';
 
-const handler = nc();
+const handler = async (req, res) => {
+  await connectDb();
+  if (req.method === 'GET') {
+    const products = await Product.aggregate([{ $sample: { size: 1 } }]);
 
-handler.get(async (req, res) => {
-  await db.connect();
-  const products = await Product.aggregate([{ $sample: { size: 1 } }]);
-  await db.disconnect();
-
-  if (products) {
-    res.status(200).json(products);
-  } else {
-    res.status(404).json({ message: 'Products not found' });
+    if (products) {
+      res.status(200).json(products);
+    } else {
+      res.status(404).json({ message: 'Products not found' });
+    }
   }
-});
+};
 
 export default handler;

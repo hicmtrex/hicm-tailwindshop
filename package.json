@@ -4,19 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build ",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.1",
     "@auth0/nextjs-auth0": "^1.6.2",
+    "@emotion/react": "^11.8.1",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "axios": "^0.26.0",
     "mongoose": "^6.2.2",
     "next": "12.1.0",
-    "next-connect": "^0.12.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-toast": "^2.2.0",

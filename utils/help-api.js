@@ -6,11 +6,9 @@ export const server =
     : 'hicm-tailwindshop.vercel.app';
 
 export const getProducts = async () => {
-  try {
-    const { data } = await axios.get(`http://localhost:3000/api/products`);
-    return data;
-  } catch (error) {
-    return error;
+  const res = await axios.get(`${server}/api/products`);
+  if (res.data) {
+    return res?.data;
   }
 };
 
