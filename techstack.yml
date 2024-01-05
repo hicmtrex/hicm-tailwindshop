@@ -2,7 +2,7 @@ repo_name: hicmtrex/hicm-tailwindshop
 report_id: c49d1f54df98349e1f3fad2f1d3b2b54
 version: 0.1
 repo_type: Public
-timestamp: '2023-12-21T15:37:42+00:00'
+timestamp: '2024-01-05T08:17:28+00:00'
 requested_by: invalid-email-address
 provider: github
 branch: main
@@ -16,6 +16,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop
   detection_source: Repo Metadata
 - name: JavaScript
   description: Lightweight, interpreted, object-oriented language with first-class
@@ -26,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop
   detection_source: Repo Metadata
 - name: Autoprefixer
   description: PostCSS plugin to parse CSS and add vendor prefixes to CSS rules
@@ -35,6 +37,7 @@ tools:
   category: Languages & Frameworks
   sub_category: CSS Pre-processors / Extensions
   image_url: https://img.stackshare.io/service/2202/72d087642cfce6fef6f2dabec5bf49e8_400x400.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop/blob/main/package.json
   detection_source: package.json
   last_updated_by: Firstname Lastname
   last_updated_on: 2022-02-22 21:48:58.000000000 Z
@@ -60,6 +63,7 @@ tools:
   category: Languages & Frameworks
   sub_category: CSS Pre-processors / Extensions
   image_url: https://img.stackshare.io/service/3339/rlFcjEdI.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop/blob/main/package.json
   detection_source: package.json
   last_updated_by: Firstname Lastname
   last_updated_on: 2022-02-19 01:08:00.000000000 Z
@@ -86,6 +90,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Front-End Frameworks
   image_url: https://img.stackshare.io/service/8158/default_660b7c41c3ba489cb581eec89c04655404258c19.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop/blob/main/package.json
   detection_source: package.json
   last_updated_by: Firstname Lastname
   last_updated_on: 2022-02-22 21:48:58.000000000 Z
@@ -112,6 +117,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop/blob/main/package.json
   detection_source: package.json
   last_updated_by: Firstname Lastname
   last_updated_on: 2022-02-19 01:08:00.000000000 Z
@@ -123,6 +129,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop
   detection_source: Repo Metadata
 - name: npm
   description: The package manager for JavaScript.
@@ -132,6 +139,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/hicmtrex/hicm-tailwindshop/blob/main/package.json
   detection_source: package.json
   last_updated_by: Firstname Lastname
   last_updated_on: 2022-02-19 01:08:00.000000000 Z
