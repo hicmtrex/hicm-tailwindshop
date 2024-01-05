@@ -40,7 +40,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [hicmtrex/hicm-tailwindshop](https://github.com/hicmtrex/hicm-tailwindshop)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|15<br/>Tools used|12/21/23 <br/>Report generated|
+|15<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
